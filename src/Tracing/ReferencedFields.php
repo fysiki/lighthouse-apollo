@@ -215,7 +215,7 @@ class ReferencedFields
     ): void {
         $immediateDeps = $depGraph[$fromName] ?? null;
 
-        if ($immediateDeps) {
+        if (is_array($immediateDeps)) {
             foreach (array_keys($immediateDeps) as $toName) {
                 if (!isset($collected[$toName])) {
                     $collected[$toName] = true;

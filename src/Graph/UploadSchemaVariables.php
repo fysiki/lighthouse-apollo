@@ -4,6 +4,9 @@ namespace BrightAlley\LighthouseApollo\Graph;
 
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @template-implements Arrayable<array-key,mixed>
+ */
 class UploadSchemaVariables implements Arrayable
 {
     use ArrayableTrait;

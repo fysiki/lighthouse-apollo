@@ -50,7 +50,7 @@ class TracingResult
      * @psalm-param TracingClient $client
      * @psalm-param TracingHttp $http
      * @psalm-param TracingInfo $tracing
-     * @psalm-param TracingError[] $errors
+     * @psalm-param list<TracingError> $errors
      */
     public function __construct(
         DocumentNode $document,

@@ -20,14 +20,14 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.2",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-zlib": "*",
         "czproject/git-php": "^4.0",
         "google/protobuf": "^v3.13.0.1",
-        "illuminate/redis": "^9.0 || ^10.0 || ^11.0",
-        "illuminate/support": "^9.0 || ^10.0 || ^11.0",
+        "illuminate/redis": ">= 11.0",
+        "illuminate/support": ">= 11.0",
         "nuwave/lighthouse": "^6.26"
     },
     "require-dev": {

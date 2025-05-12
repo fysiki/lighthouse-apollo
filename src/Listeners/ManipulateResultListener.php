@@ -188,7 +188,7 @@ class ManipulateResultListener
     ): void {
         if (
             $this->config->get('lighthouse-apollo.mute_tracing_extensions') &&
-            $event->result->extensions
+            isset($event->result->extensions)
         ) {
             unset($event->result->extensions['tracing']);
         }

@@ -10,7 +10,7 @@ use Mdg\Trace\Error;
 use Mdg\Trace\Node;
 
 /**
- * @psalm-type TracingPath = (int|string)[]
+ * @psalm-type TracingPath = array<int, int|string>
  *
  * @psalm-type TracingClient = array{
  *     name: string|null,
@@ -18,9 +18,10 @@ use Mdg\Trace\Node;
  * }
  * @psalm-type TracingError = array{
  *     debugMessage?: string,
- *     locations: array{line: int, column: int}[],
+ *     locations?: array<int, array{line: int, column: int}>,
  *     message: string,
- *     path: TracingPath
+ *     path?: TracingPath,
+ *     extensions?: array<string, mixed>,
  * }
  * @psalm-type TracingHttp = array{
  *     request_headers?: array<string, (string|null)[]>,
@@ -236,12 +237,10 @@ class TraceTreeBuilder
     {
         return new Error([
             'message' => $error['debugMessage'] ?? $error['message'],
-            'location' => !empty($error['locations'])
-                ? array_map(
-                    static fn(array $location) => new Trace\Location($location),
-                    $error['locations'],
-                )
-                : [],
+            'location' => array_map(
+                static fn(array $location) => new Trace\Location($location),
+                $error['locations'] ?? [],
+            ),
             'json' => json_encode($error, JSON_THROW_ON_ERROR),
         ]);
     }
