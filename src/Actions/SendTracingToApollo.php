@@ -12,6 +12,7 @@ use Google\Protobuf\Internal\Message;
 use Google\Protobuf\Internal\RepeatedField;
 use GraphQL\Type\Schema;
 use Illuminate\Contracts\Config\Repository as Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use LogicException;
 use Mdg\Report;
@@ -68,18 +69,32 @@ class SendTracingToApollo
                 $trace->operationName,
             );
             if (!isset($tracesPerQuery[$querySignature])) {
-                $tracesPerQuery[$querySignature] = new TracesAndStats([
-                    'referenced_fields_by_type' => ReferencedFields::calculateReferencedFieldsByType(
-                        $trace->document,
-                        $schemaBuilder->schema(),
-                        $trace->operationName,
-                    ),
-                ]);
+                try {
+                    $tracesPerQuery[$querySignature] = new TracesAndStats([
+                        'referenced_fields_by_type' => ReferencedFields::calculateReferencedFieldsByType(
+                            $trace->document,
+                            $schemaBuilder->schema(),
+                            $trace->operationName,
+                        ),
+                    ]);
+                } catch (LogicException $e) {
+                    Log::warning($e->getMessage(), [
+                        'query' => $trace->queryText,
+                        'operationName' => $trace->operationName,
+                    ]);
+
+                    continue;
+                }
             }
 
             $tracesPerQuery[
                 $querySignature
             ]->getTrace()[] = $trace->getTracingAsProtobuf();
+        }
+
+        // If we don't have any traces, nothing to do.
+        if (count($tracesPerQuery) === 0) {
+            return;
         }
 
         $body = $this->getReportWithTraces($tracesPerQuery);

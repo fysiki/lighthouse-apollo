@@ -13,6 +13,7 @@ use Nuwave\Lighthouse\Events\StartExecution;
 use Nuwave\Lighthouse\Events\StartRequest;
 use Nuwave\Lighthouse\Execution\Arguments\ArgumentSet;
 use Nuwave\Lighthouse\Execution\ResolveInfo as NuwaveResolveInfo;
+use Nuwave\Lighthouse\Tracing\ApolloTracing\ApolloTracing;
 use Nuwave\Lighthouse\Tracing\Tracing;
 
 trait UsesSampleData
@@ -42,7 +43,7 @@ trait UsesSampleData
 
     private function sampleTracingData(): array
     {
-        $tracing = new Tracing();
+        $tracing = new ApolloTracing();
         if (method_exists($tracing, 'handleStartRequest')) {
             $tracing->handleStartRequest(
                 $this->createMock(StartRequest::class),
