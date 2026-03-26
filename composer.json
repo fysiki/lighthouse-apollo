@@ -1,62 +1,62 @@
 {
-    "name": "bright-alley/lighthouse-apollo",
-    "description": "Integration to upload information from Laravel Lighthouse to Apollo Studio.",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Maarten Staa",
-            "email": "maarten.staa@brightalley.nl"
-        }
-    ],
-    "keywords": [
-        "laravel",
-        "lighthouse",
-        "graphql",
-        "apollo",
-        "tracing",
-        "performance",
-        "metrics"
-    ],
-    "minimum-stability": "stable",
-    "require": {
-        "php": ">=8.2",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-zlib": "*",
-        "czproject/git-php": "^4.0",
-        "google/protobuf": "^v3.13.0.1",
-        "illuminate/redis": ">= 11.0",
-        "illuminate/support": ">= 11.0",
-        "nuwave/lighthouse": "^6.26"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.4 || ^10.5",
-        "vimeo/psalm": "^4.30 || ^5.22"
-    },
-    "autoload": {
-        "psr-4": {
-            "BrightAlley\\LighthouseApollo\\": "src",
-            "Mdg\\": "generated/Mdg",
-            "Metadata\\": "generated/Metadata"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "BrightAlley\\Tests\\": "tests"
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "BrightAlley\\LighthouseApollo\\ServiceProvider"
-            ]
-        }
-    },
-    "scripts": {
-        "update-proto": "curl -sSfo resources/reports.proto https://usage-reporting.api.apollographql.com/proto/reports.proto"
+  "name": "bright-alley/lighthouse-apollo",
+  "description": "Integration to upload information from Laravel Lighthouse to Apollo Studio.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maarten Staa",
+      "email": "maarten.staa@brightalley.nl"
     }
+  ],
+  "keywords": [
+    "laravel",
+    "lighthouse",
+    "graphql",
+    "apollo",
+    "tracing",
+    "performance",
+    "metrics"
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=8.2",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-zlib": "*",
+    "czproject/git-php": "^4.0",
+    "google/protobuf": "^v4.33.6",
+    "illuminate/redis": ">= 11.0",
+    "illuminate/support": ">= 11.0",
+    "nuwave/lighthouse": "^6.26"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.4 || ^10.5",
+    "vimeo/psalm": "^4.30 || ^5.22"
+  },
+  "autoload": {
+    "psr-4": {
+      "BrightAlley\\LighthouseApollo\\": "src",
+      "Mdg\\": "generated/Mdg",
+      "Metadata\\": "generated/Metadata"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "BrightAlley\\Tests\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "BrightAlley\\LighthouseApollo\\ServiceProvider"
+      ]
+    }
+  },
+  "scripts": {
+    "update-proto": "curl -sSfo resources/reports.proto https://usage-reporting.api.apollographql.com/proto/reports.proto"
+  }
 }
